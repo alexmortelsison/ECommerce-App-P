@@ -1,4 +1,4 @@
-import 'package:ecommerce_practice/pages/home_page.dart';
+import 'package:ecommerce_practice/pages/shop_page.dart';
 import 'package:ecommerce_practice/themes/light_mode.dart';
 import 'package:flutter/material.dart';
 import 'pages/intro_page.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       home: const IntroPage(),
       routes: {
         'intro_page': (context) => const IntroPage(),
-        'home_page': (context) => const HomePage(),
+        'shop_page': (context) => const ShopPage(),
       },
     );
   }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_practice/models/shop.dart';
+import 'package:ecommerce_practice/pages/cart_page.dart';
 import 'package:ecommerce_practice/pages/shop_page.dart';
 import 'package:ecommerce_practice/themes/light_mode.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
       theme: lightMode,
       home: const IntroPage(),
       routes: {
-        'intro_page': (context) => const IntroPage(),
-        'shop_page': (context) => const ShopPage(),
+        '/intro_page': (context) => const IntroPage(),
+        '/shop_page': (context) => const ShopPage(),
+        '/cart_page': (context) => const CartPage(),
       },
     );
   }

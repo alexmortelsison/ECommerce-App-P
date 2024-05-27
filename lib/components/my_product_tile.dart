@@ -1,5 +1,8 @@
 import 'package:ecommerce_practice/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/shop.dart';
 
 class MyProductTile extends StatelessWidget {
   final Product product;
@@ -7,6 +10,45 @@ class MyProductTile extends StatelessWidget {
     super.key,
     required this.product,
   });
+
+  void addToCart(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: const Text('Add this item to cart?'),
+        actions: [
+          MaterialButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          MaterialButton(
+            onPressed: () {
+              Navigator.pop(context);
+              context.read<Shop>().addToCart(product);
+            },
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+                context.watch<Shop>().addToCart(product);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.inversePrimary,
+                    content: Text(
+                      'Added to cart!',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
+                  ),
+                );
+              },
+              child: const Text('Yes'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +78,12 @@ class MyProductTile extends StatelessWidget {
                   child: Image.asset(product.imagePath),
                 ),
               ),
-              Text(
-                product.name,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-              ),
-              Text(
-                product.description,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary),
-              ),
+              Text(product.name,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 24)),
+              Text(product.description,
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.inversePrimary)),
             ],
           ),
           Row(
@@ -57,7 +95,7 @@ class MyProductTile extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(12)),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () => addToCart(context),
                   icon: const Icon(Icons.add),
                 ),
               )

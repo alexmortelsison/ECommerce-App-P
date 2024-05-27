@@ -23,14 +23,25 @@ class MyDrawer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const MyListTile(icon: Icons.home_outlined, text: 'Home'),
-                const MyListTile(
-                    icon: Icons.shopping_cart_outlined, text: 'Cart'),
+                MyListTile(
+                  icon: Icons.home_outlined,
+                  text: 'Home',
+                  onTap: () => Navigator.pushNamed(context, '/shop_page'),
+                ),
+                MyListTile(
+                  icon: Icons.shopping_cart_outlined,
+                  text: 'Cart',
+                  onTap: () => Navigator.pushNamed(context, '/cart_page'),
+                ),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 25),
-              child: MyListTile(icon: Icons.logout, text: 'Log Out'),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 25),
+              child: MyListTile(
+                icon: Icons.logout,
+                text: 'Log Out',
+                onTap: () => Navigator.pushNamed(context, '/intro_page'),
+              ),
             )
           ],
         ),
